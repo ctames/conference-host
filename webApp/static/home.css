@@ -1,0 +1,120 @@
+html,body{margin:0;padding:0}
+body {margin:0;padding:0;background-color:#fff;color:#4d4d4d;font-family:'Open Sans',sans-serif;font-size:14px;line-height:16px;-webkit-font-smoothing:subpixel-antialiased}
+p{margin-top:10px; margin-bottom: 5px;}
+a{color:#000000;}
+div#header{background-color:#73E2FD;}
+div#header h1{height:80px;line-height:80px;margin:0;padding-left:10px;}
+div#container{text-align:left}
+div#content p{line-height:1.4}
+div#content li{margin-left:0px; line-height:1.4}
+div#navigation{background:#F6F0E0;}
+div#navigation ul{margin:15px 0; padding:0; list-style-type:none;}
+div#navigation li{margin-bottom:5px;}
+div#extra{background:#CCC8B3;}
+div#footer{
+	border-left: 2px solid darkred;
+	padding-left:5px;
+	margin-top:5px;
+	margin-bottom:5px;
+	background:#BFBD93;
+}
+div#footer p{margin:0;padding:5px 10px}
+div#container{width:850px;margin:0 auto;padding:10px 10px}
+div#content{float:left;width:850px;}
+div#navigation{float:right;width:150px}
+div#extra{float:left;width:600px}
+div#footer{clear:both;width:100%}
+
+div.gap {
+  height:10px; clear:both;
+}
+
+div.pagination {
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    background-color: #EEEEEE;
+}
+
+div.explanation {
+    padding-bottom: 10px;
+    padding-top: 5px;
+    font-weight: 300;
+    font-style: italic;
+}
+
+div.hanging {
+     padding-left: 25px;
+     text-indent: -25px;
+     padding-bottom: 5px;
+}
+
+span.user {
+   font-style: italic;
+   color: darkred;
+}
+
+span.noshow {
+   font-style: italic;
+   color: #222;
+}
+
+span.warning {
+   color: darkred;
+   font-weight: 700;
+}
+
+span.editlink {
+   font-weight: 200;
+   color: gray;
+   vertical-align: super;	
+   font-size: smaller;
+}
+
+div.editform {
+   border: 1px solid darkred;   
+   background-color: #EEEEEE;
+   padding-top: 3px;
+   padding-bottom: 0px;
+   padding-left: 10px;
+}
+
+div.ptitle { 
+     font-weight: 500;
+     padding-top: 5px;
+     padding-left: 25px;
+     text-indent: -25px;
+     font-style: italic;	
+}
+
+div.day {
+   background: #3498db;
+   font-weight: 600;
+   text-align: center;
+   color: #eef;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   margin-bottom: 5px;
+   margin-top: 5px;
+}
+
+div.indented {
+   font-weight: 200;
+   text-indent: 0px;
+   padding-left: 25px;
+   padding-bottom: 0px;	   
+}
+
+div.d3graph {
+
+}
+
+span.note {
+   font-weight: 200;
+}   
+
+tr.personalized td {
+      background-color: #FFDD88; color: black;
+}
