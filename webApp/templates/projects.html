@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block maintitle %}
+{{ title }}
+{% endblock %}
+{% block content %}
+
+<div class="explanation">{{ explanation|safe }}</div>
+
+{% if paginate %}
+<div class="pagination">
+    <span class="step-links">
+        {% if projects.has_previous %}
+        [<a href="?page={{ projects.previous_page_number }}">Previous</a>] &nbsp;
+        {% endif %}
+
+        <span class="current">
+            Page {{ projects.number }} of {{ projects.paginator.num_pages }}
+        </span>
+
+        {% if projects.has_next %}
+        &nbsp; [<a href="?page={{ projects.next_page_number }}">Next</a>] 
+	&nbsp;&nbsp;&nbsp; [<a href="?page=all">Show All</a>]
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% for project in projects %}
+<div class="hanging">
+  {{ project.displayLinkName|safe }}
+</div>
+{% endfor %}
+
+
+{% if paginate %}
+<div class="pagination">
+    <span class="step-links">
+        {% if projects.has_previous %}
+        [<a href="?page={{ projects.previous_page_number }}">Previous</a>] &nbsp;
+        {% endif %}
+
+        <span class="current">
+            Page {{ projects.number }} of {{ projects.paginator.num_pages }}
+        </span>
+
+        {% if projects.has_next %}
+        &nbsp; [<a href="?page={{ projects.next_page_number }}">Next</a>] 
+	&nbsp;&nbsp;&nbsp; [<a href="?page=all">Show All</a>]
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% endblock %}

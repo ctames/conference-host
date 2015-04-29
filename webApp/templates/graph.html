@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block style %}
+
+<style>
+.link {
+  stroke: #ccc;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px 'Open Sans';
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% block header %}
+This is the GRAPH
+{% endblock %}
+
+<div class="d3graph">
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+ var json = {{ json_str|safe }};
+
+var w = {% if graphwidth %} {{ graphwidth }} {% else%} 850 {% endif %} , 
+    h = {% if graphheight %} {{ graphheight }} {% else %} 400 {% endif %};
+    var labelDistance = 0;
+
+    var nodes = json.nodes
+    var links = json.links
+
+    var vis = d3.select("#content").append("svg:svg").attr("width", w).attr("height", h);
+
+    vis.append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "#FFFFF0");
+
+    var labelAnchors = [];
+    var labelAnchorLinks = [];
+
+    for(var i = 0; i < nodes.length; i++) {
+        labelAnchors.push({
+            node : nodes[i]
+        });
+        labelAnchors.push({
+            node : nodes[i]
+        });
+        labelAnchorLinks.push({
+            source : i * 2,
+            target : i * 2 + 1,
+            value : 1
+        });
+    };
+
+    linkd = 20 + ((2000 - (5 * nodes.length)) / 50);
+
+    chargev = -3000 + (nodes.length * 10)
+
+    if (chargev > -800) { 
+        chargev = -800;
+    }
+
+    // Length of links is determined by the weights between nodes.
+    var force = d3.layout.force().size([w, h]).nodes(nodes).links(links).gravity(1).linkDistance(linkd).charge(chargev).linkStrength(function(x) {
+        return x.value
+    });
+    force.start();
+
+    var force2 = d3.layout.force().nodes(labelAnchors).links(labelAnchorLinks).gravity(0).linkDistance(0).linkStrength(8).charge(-100).size([w, h]);
+    force2.start();
+
+    var link = vis.selectAll("line.link").data(links).enter().append("svg:line").attr("class", "link").style("stroke", "#CCC").attr('stroke-width', function(d) { return d.value; });
+
+    var node = vis.selectAll("g.node").data(force.nodes()).enter().append("svg:g").attr("class", "node");
+    node.append("svg:circle").attr("r", 5).style("fill", "#555").style("stroke", "#FFF").style("stroke-width", 3);
+    node.call(force.drag);
+
+    var anchorNode = vis.selectAll("g.anchorNode").data(force2.nodes()).enter().append("svg:g").attr("class", "anchorNode");
+    anchorNode.append("svg:circle").attr("r", 0).style("fill", "#00F");
+anchorNode.append("svg:a").attr("xlink:href", function(d){ if (d.node.pid) { 
+  return "/pi/" + d.node.pid }
+	else { if (d.node.instid) { return  "/institution/" + d.node.instid } else { return  "/" }}}
+    ).append("svg:text").text(function(d, i) {
+        return i % 2 == 0 ? "" : d.node.name
+	    }).style("fill", "#555").style("font-family", "Open Sans").style("font-size", {% if fontsize %} {{ fontsize }} {% else %} 11 {% endif %});
+
+    var updateLink = function() {
+        this.attr("x1", function(d) {
+            return d.source.x;
+        }).attr("y1", function(d) {
+            return d.source.y;
+        }).attr("x2", function(d) {
+            return d.target.x;
+        }).attr("y2", function(d) {
+            return d.target.y;
+        });
+    }
+
+    var updateNode = function() {
+        this.attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+    }
+
+
+    force.on("tick", function() {
+        force2.start();
+        node.call(updateNode);
+
+        anchorNode.each(function(d, i) {
+            if(i % 2 == 0) {
+                d.x = d.node.x;
+                d.y = d.node.y;
+            } else {
+                var b = this.childNodes[1].getBBox();
+
+                var diffX = d.x - d.node.x;
+                var diffY = d.y - d.node.y;
+
+                var dist = Math.sqrt(diffX * diffX + diffY * diffY);
+
+                var shiftX = b.width * (diffX - dist) / (dist * 2);
+                shiftX = Math.max(-b.width, Math.min(0, shiftX));
+                var shiftY = 5;
+                this.childNodes[1].setAttribute("transform", "translate(" + shiftX + "," + shiftY + ")");
+            }
+        });
+        anchorNode.call(updateNode);
+        link.call(updateLink);
+    });
+
+</script>
+</div>
+
+{% block after %}
+
+{% endblock %}
+
+{% endblock %} 
+

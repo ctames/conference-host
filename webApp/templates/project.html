@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+NSF Project {{ project.displayName }}
+{% endblock %}
+{% block maintitle %}
+{{ project.awardID }}: {{ project.title|truncatechars:44 }}
+{% endblock %}
+{% block content %}
+
+<div class="hanging">
+  <b><em> {{ project.title }} </em></b>
+</div>   
+ {{ project.institution.displayName|safe }} <br>
+{{ project.startDate|date:"SHORT_DATE_FORMAT" }} &ndash; {{ project.expirationDate|date:"SHORT_DATE_FORMAT" }} (${{amount}})
+
+<p>
+  <h3>Abstract</h3>
+  {{ project.abstract |safe }}
+</p>
+<h3>Investigator{{ pis|pluralize }}</h3>
+<p>
+  {% for pi in pis %}
+  <div class="hanging">
+    {{ pi.investigator.fullDisplay|safe }} 
+    <span class="note">({{ pi.role }})</span>
+  </div>
+  {% endfor %}
+  {% if collabs %}
+    <div class="gap"></div>
+    {% for pi, proj in collabpis %}
+    <div class="hanging">
+      {{ pi.fullDisplay|safe }} <span class="note">[Collaborative: {{ proj.displayLinkId|safe}}]</span>
+    </div>
+    {% endfor %}
+ {% endif %}
+
+</p>
+{% endblock %}

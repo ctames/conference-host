@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block maintitle %}
+{{ title }}
+{% endblock %}
+{% block content %}
+
+<div class="explanation">
+{{ explanation }}
+</div>
+
+{% if paginate %}
+<div class="pagination">
+    <span class="step-links">
+        {% if institutions.has_previous %}
+        [<a href="?page={{ institutions.previous_page_number }}">Previous</a>] &nbsp;
+        {% endif %}
+
+        <span class="current">
+            Page {{ institutions.number }} of {{ institutions.paginator.num_pages }}
+        </span>
+
+        {% if institutions.has_next %}
+        &nbsp; [<a href="?page={{ institutions.next_page_number }}">Next</a>] 
+	&nbsp;&nbsp;&nbsp; [<a href="?page=all">Show All</a>]
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% for institution in institutions %}
+<div class="hanging">
+  {{ institution.fullDisplay|safe }}
+</div>
+{% endfor %}
+</p>
+
+{% if paginate %}
+<div class="pagination">
+    <span class="step-links">
+        {% if institutions.has_previous %}
+        [<a href="?page={{ institutions.previous_page_number }}">Previous</a>] &nbsp;
+        {% endif %}
+
+        <span class="current">
+            Page {{ institutions.number }} of {{ institutions.paginator.num_pages }}
+        </span>
+
+        {% if institutions.has_next %}
+        &nbsp; [<a href="?page={{ institutions.next_page_number }}">Next</a>] 
+	&nbsp;&nbsp;&nbsp; [<a href="?page=all">Show All</a>]
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% endblock %}

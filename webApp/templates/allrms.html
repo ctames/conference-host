@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+Rapid Meetings
+{% endblock %}
+{% block maintitle %}
+Rapid Meetings
+{% endblock %}
+{% block content %}
+
+{% for rm in rms %}
+<div class="hanging">
+  {{rm.id}} round {{rm.round}}: {{ rm.pi1.fullDisplay|safe }} [{{ rm.pi1.id }}]
+{% if rm.pi2 %}
+, {{ rm.pi2.fullDisplay|safe }}  [{{ rm.pi2.id }}]
+{% if rm.pi3 %}
+, {{ rm.pi3.fullDisplay|safe }}  [{{ rm.pi3.id }}]
+{% if rm.pi4 %}
+,  {{ rm.pi4.fullDisplay|safe }}  [{{ rm.pi4.id }}] 
+{% endif %}
+{% endif %}
+{% else %}
+<b>NO PARTNERS</b>
+{% endif %}
+<br>
+Score: {{ rm.score }} / Reason: {{ rm.reason }}
+</div>
+{% endfor %}
+</p>
+
+
+{% if paginate %}
+<div class="pagination">
+    <span class="step-links">
+        {% if pis.has_previous %}
+        [<a href="?page={{ pis.previous_page_number }}">Previous</a>] &nbsp;
+        {% endif %}
+
+        <span class="current">
+            Page {{ pis.number }} of {{ pis.paginator.num_pages }}
+        </span>
+
+        {% if pis.has_next %}
+        &nbsp; [<a href="?page={{ pis.next_page_number }}">Next</a>] 
+	&nbsp;&nbsp;&nbsp; [<a href="?page=all">Show All</a>]
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% endblock %}

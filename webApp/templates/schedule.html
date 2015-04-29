@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}
+Schedule: {{ pi.displayName }}
+{% endblock %}
+{% block maintitle %}
+Schedule for {{ pi.displayName }}
+{% endblock %}
+{% block content %}
+
+<div class="day">
+Monday 5 January 2015
+</div>
+
+<table width="100%">
+<tr>
+<td width="13%"><b>8:30-9:15am</b></td><td width="20%">Regency EF</td><td>Welcome: <a href="http://www-net.cs.umass.edu/personnel/kurose.html">Jim Kurose</a> and <a href="http://bush.tamu.edu/faculty/jmumpower/">Jeryl Mumpower</a> (NSF)</td></tr>
+<td><b>9:15-10:30am</b></td><td>Regency EF</td><td>Keynote: <A href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/sweeney"><em>What's on the Horizon?</em></a>, <a href="http://latanyasweeney.org/">Latanya Sweeney</a> (Harvard University)</td></tr>
+<td><b>10:30-11:00am</b></td><td>Regency Foyer</td><td>Break</td></tr>
+<td><b>11am-12:15pm</b></td><td>Regency EF</td><td><div class="hanging">Panel: <a href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/ethics-security-privacy-research"><em>Ethics in Security and Privacy Research</em></a> (<a href="http://mdbailey.ece.illinois.edu/">Michael Bailey</a>, <a href="http://www.ece.cmu.edu/~lbauer">Lujo Bauer</a>, <a href="http://cseweb.ucsd.edu/~savage">Stevan Savage</a>; <a href="http://www.heinz.cmu.edu/~rtelang/rahul_res.html">Rahul Telang</a>)</div></td></tr>
+<td><b>12:15-1:30pm</b></td><td>Independence Center</td><td>Lunch</td></tr>
+
+{% if breakout1 %}
+<tr class="personalized"><td><b>1:30-3:00pm</b></td>
+<td><b>{{ breakout1.location }}</b></td><td><b>Breakout {{breakout1.number}}: <a href="/breakout/{{breakout1.number}}">{{ breakout1.title }}</b></a>
+{% if breakout1leader %} <b>(Leader)</b> {% endif %}
+</td>
+{% else %}
+<tr><td><b>1:30-3:00pm</b></td>
+<td>Regency EF</td><td><div class="hanging">Panel: <a href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/educating-everyone"><em>Educating Everyone</em></a> (<a href="http://gsehd.gwu.edu/faculty/diana-burley">Diana Burley</a>, <a href="http://cs.brown.edu/~sk/">Shriram Krishnamurthi</a>, <a href="http://znjp.com/">Zachary Peterson</a>; <a href="http://www.nsf.gov/mobile/staff/staff_bio.jsp?lan=vpiotrow&org=NSF">Victor Piotrowski</a>)</div></td>
+{% endif %}
+</tr>
+<tr><td><b>3:00-3:30pm</b></td><td>Regency Foyer</td><td>Break</td></tr>
+
+<tr><td><b>3:30-5:00pm</b></td><td><em>Various Locations</em></td><td><b>Rapid-Fire Cross Collaborations</b></td></tr>
+
+{% if rm %}
+{% for rfmeeting in rm %}
+<div class="hanging">{{ rfmeeting.displayMeeting|safe }}</div>
+{% endfor %}
+{% else %}
+<tr><td></td><td></td><td>No rapid-fire cross collaborations scheduled.  If you would like to participate in ad-hoc rapid matching, go to headquarters in Regency EF.</td></tr>
+{% endif %}
+
+<tr><td><b>6:00-8:00pm</b></td><td>Independence Center</td><td><a href="/posters">Poster Session and Reception</a></td></tr>
+
+{% if poster %}
+<tr class="personalized"><td></td><td></td><td><div class="hanging">Present poster: <b><em>{{ poster.showTitle|safe }}</em></b></div></td></tr>
+{% endif %}
+
+</table>
+
+<div class="day">
+Tuesday 6 January 2015
+</div>
+
+<table width="100%">
+<tr>
+<td width="13%"><b>8:30-9:00am</b></td><td width="20%">Regency EF</td><td>Opening: <a href="http://cseweb.ucsd.edu/~marzullo/">Keith Marzullo</a> and <a href="http://math.rutgers.edu/~vogelius/">Michael Vogelius</a> (NSF)</td></tr>
+<tr>
+<td><b>9:00-9:15am</b></td><td>Regency EF</td><td><a href="https://www.usenix.org/conference/satcpi15/technical-sessions/presentation/satc-programmatics">SaTC Programmatics</a>, <a href="http://www.nsf.gov/mobile/staff/staff_bio.jsp?lan=jepstein&org=EHR&from_org=EHR">Jeremy Epstein</a> (NSF)</td></tr>
+<td><b>9:15-10:30am</b></td><td>Regency EF</td><td>Keynote: <a href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/geer"><em>T.S. Kuhn Revisited</em></a>, Dan Geer (In-Q-Tel)</td></tr>
+<tr><td><b>10:30-11:00am</b></td><td>Regency Foyer</td><td>Break</td></tr>
+<tr><td><b>11am-12:15pm</b></td><td>Regency EF</td><td><div class="hanging">Panel: <a href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/ideas-to-innovations"><em>Ideas to Innovations</em></a> (<a href="http://www.cmu.edu/research-office/organization/farnam-jahanian.html">Farnam Jahanian</a>, <a href="http://cs.gmu.edu/~astavrou/">Angelos Stavrou</a>, <a href="http://www.cs.ucsb.edu/~vigna/index.html">Giovanni Vigna</a>; <a href="http://www.cise.ufl.edu/~traynor">Patrick Traynor</a>)</div></td></tr>
+<tr><td><b>12:15-1:30pm</b></td><td>Independence Center</td><td>Lunch</td></tr>
+{% if breakout2 %}
+<tr class="personalized"><td><b>1:30-3:00pm</b></td>
+<td><b>{{ breakout2.location }}</b></td><td><b>Breakout {{breakout2.number}}: <a href="/breakout/{{breakout2.number}}">{{ breakout2.title }}</b></a>
+{% if breakout2leader %} <b>(Leader)</b> {% endif %}
+</td>
+{% else %}
+<tr><td><b>1:30-3:00pm</b></td>
+<td>Regency EF</td><td><div class="hanging">Panel: <a href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/security-privacy-challenges-in-health-informatics"><em>Security and Privacy Challenges in Health Informatics</em></a> (<a href="http://xiaoqianjiang.weebly.com/">Xiaoqian Jiang</a>, <a href="http://www.cs.dartmouth.edu/~dfk">David Kotz</a>, <a href="http://www.informatics.indiana.edu/xw7">XiaoFeng Wang</a>; <a href="http://www.cs.umd.edu/~elaine">Elaine Shi</a>)</div></td>
+{% endif %}
+</tr>
+
+<tr><td><b>3:00-3:30pm</b></td><td>Regency Foyer</td><td>Break</td></tr>
+
+{% if breakout3 %}
+<tr class="personalized"><td><b>3:30-5:00pm</b></td>
+<td><b>{{ breakout3.location }}</b></td><td><b>Breakout {{breakout3.number}}: <a href="/breakout/{{breakout3.number}}">{{ breakout3.title }}</b></a>
+{% if breakout3leader %} <b>(Leader)</b> {% endif %}
+</td>
+{% else %}
+<tr><td><b>3:30-5:00pm</b></td>
+<td>Regency EF</td><td><div class="hanging">Panel: <a href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/future-of-privacy"><em>Future of Privacy</em></a> (<a href="http://www.cs.utah.edu/~tdenning">Tamara&nbsp;Denning</a>, <a href="http://www.cs.indiana.edu/~kapadia">Apu&nbsp;Kapadia</a>, <a href="http://randomwalker.info">Arvind&nbsp;Narayanan</a>; <a href="http://www.nsf.gov/mobile/staff/staff_bio.jsp?lan=CCLIFTON&org=NSF&from_org=NSF">Christopher&nbsp;Clifton</a>)</div></tr>
+{% endif %}
+</tr>
+
+<tr><td><b>5:30-7:30pm</b></td><td>Potomac Rooms</td>
+<td><a href="https://www.usenix.org/conference/satcpi15/birds-feather-sessions">Birds-of-a-Feather Sessions</a></td></tr>
+</table>
+
+<div class="day">
+Wednesday 7 January 2015
+</div>
+
+<table width="100%">
+<tr>
+<td width="13%"><b>8:30-9:15am</b></td><td width="20%">Regency EF</td><td>Opening:
+<a href="http://www.khargonekar.ece.ufl.edu/">Pramod Khargonekar</a> and <a href="http://www.nsf.gov/mobile/staff/staff_bio.jsp?lan=jferrini&org=NSF&from_org=">Joan Ferrini-Mundy</a> (NSF)</td></tr>
+<tr>
+<td><b>9:15-10:30am</b></td><td>Regency EF</td><td>Keynote: <a href="https://www.csail.mit.edu/user/1283">Daniel Weitzner</a> (MIT)</td></tr>
+<tr><td><b>10:30-11:00am</b></td><td>Regency Foyer</td><td>Break</td></tr>
+{% if breakoutleader %}
+<tr class="personalized"><td><b>11am-12:15pm</b></td><td>Regency EF</td><td>
+<b>Present Results of Breakout Discussion</b>
+{% else %}
+<tr><td><b>11am-12:15pm</b></td><td>Regency EF</td><td>
+Results of Breakout Discussions
+{% endif %}
+</td></tr>
+<tr><td><b>12:15-1:30pm</b></td><td>Independence Center</td><td>Lunch</td></tr>
+<tr><td><b>1:30-2:45pm</b></td><td>Regency EF</td><td><div class="hanging">Panel: <a href="https://www.usenix.org/conference/satcpi15/meeting-program/presentation/closing-panel-satc-2029"><em>SaTC 2029?</em></a> (<a href="http://www.landwehr.org/">Carl&nbsp;Landwehr</a>, <a href="http://www.patrickmcdaniel.org/">Patrick&nbsp;McDaniel</a>, <a href="http://www.cs.ucla.edu/~sahai/">Amit&nbsp;Sahai</a>; <a href="http://www.cs.virginia.edu/evans">David&nbsp;Evans</a>)</div></td></tr>
+<tr><td><b>2:45-3:00pm</b></td><td>Regency EF</td><td>Closing</td></tr>
+</table>
+{% endblock %}

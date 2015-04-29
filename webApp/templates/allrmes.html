@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}
+Rapid Meeting Evaluations
+{% endblock %}
+{% block maintitle %}
+Rapid Meeting Evaluations
+{% endblock %}
+{% block content %}
+
+{% for rme in rmes %}
+<div class="hanging">
+  {{ rme.id }}: rate meeting {{ rme.rm.id }} by {{ rme.pi.id }} 
+<blockquote>
+{{ rme.rm.displayMeetingReason|safe }} <br>
+  Rater: {{ rme.pi.fullDisplay|safe }}<br>
+{% if rme.rpi1 %} &nbsp;&nbsp;Present 1: {{ rme.rpi1.fullDisplay|safe }}<br> {% endif %}
+{% if rme.rpi2 %} &nbsp;&nbsp;Present 2: {{ rme.rpi2.fullDisplay|safe }}<br> {% endif %}
+{% if rme.rpi3 %} &nbsp;&nbsp;Present 3: {{ rme.rpi3.fullDisplay|safe }}<br> {% endif %}
+  Guessreason: {{ rme.guessreason }}<br>
+  Matchquality: {{ rme.matchquality }}<br>
+  Comments: {{ rme.comments }}<br>
+</blockquote>
+</div>
+{% endfor %}
+</p>
+
+{% endblock %}

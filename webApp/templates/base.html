@@ -1,0 +1,66 @@
+{% load browserid %} 
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% browserid_css %}
+	<title>{% block title %}SaTC PIs{% endblock %}</title>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}" />
+
+{% block style %}
+{% endblock %}
+
+<body>
+{% browserid_info %}
+<div id="container">
+
+<div id="header"><h1>{% block maintitle %}SaTC PIs Base Page{% endblock %}</h1></div>
+
+{% block menu %}
+<div id="menu">{{ menu|safe }} 
+<!--
+  <div id="wrapper">
+{% csrf_token %}
+        {% if user.is_authenticated %}
+        <span class="user">{{ user.email }} | {% browserid_logout text='Logout' %}</span>
+        {% else %}
+	<div class = "authentication">
+          {% browserid_login text='Login' color='dark' %}
+	</div>
+	{% endif %}
+  </div>
+-->
+</div>
+{% endblock %}
+
+
+<p> </p>
+
+<div id="content">
+{% block content %}
+EMPTY BASE
+{% endblock %}
+</div>
+
+<div class="gap"></div>
+
+{% block footer %}
+    
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    {% browserid_js %}
+
+<div id="footer">
+<a href="/">rematchr.org</a>
+</div>
+{% endblock %}
+
+</div> <!-- end container-->
+
+</body>
+</html> 

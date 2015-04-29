@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}
+Profile: {{ pi.displayName }}
+{% endblock %}
+{% block maintitle %}
+SaTC Profile: {{ pi.displayName }}
+{% endblock %}
+{% block content %}
+
+{% if pi.homepage and not request.GET.force %}
+<a href="{{pi.homepage}}">Home Page</a>
+{% if user.is_authenticated and user.email == pi.email %}
+<span class="editlink"><a href="/profile?force=homepage">[Edit]</a></span>
+{% endif %} 
+{% else %}
+{% if user.is_authenticated and user.email == pi.email %}
+<div class="editform">
+<form action="/edit_home_page" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+Homepage link: <input type="text" size=40 name="homepageURL" value="{{pi.homepage}}">
+<input type="submit" value="Update" /></p>
+</form>
+</div>
+{% endif %}
+{% endif %} 
+
+<h3>Affiliation{{ institutions|pluralize }}</h3>
+{% for institution in institutions %}
+<div class="hanging">
+  {{ institution.fullDisplay|safe }}
+</div>
+{% endfor %}
+
+<h3>Project{{ projects|pluralize }}</h3>
+<p>
+Total awarded: ${{ totalawarded }}
+</p>
+{% for project in projects %}
+<div class="hanging">
+  {% if project.satc %}<b>{% else %}{% endif %}
+  {{ project.displayLinkName|safe }}
+  {% if project.satc %}</b>{% else %}{% endif %}
+</div>
+{% endfor %}
+
+{% if collaborators %}
+<h3>Collaborator{{ collaborators|pluralize }}</h3>
+{% for pi in collaborators %}
+<div class="hanging">
+  {{ pi.fullDisplay|safe }}
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

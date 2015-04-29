@@ -1,0 +1,65 @@
+{% load browserid %}
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+	{% browserid_css %}
+        <title>>Upload from {{ address }} </title>   
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}" />
+    </head>
+<body>
+{% browserid_info %}
+<div id="container">
+<div id="header"><h1>{{user.email}}'s Profile</h1></div>
+  <div id="wrapper">
+{% csrf_token %}
+        {% if user.is_authenticated %}
+	<div id="menu">
+      <ul>
+      <li><a href="{% url 'home' %}">Profile Home</a></li>
+      <li><a href="{% url 'manage' %}">Manage Documents</a></li>
+	<li><a href="{% url 'manage' %}">Profile Settings</a></li>
+    	<li><div class = "authentication">
+          {% browserid_logout text='Logout' %}
+	</div></li></ul>
+        {% else %}
+	<div id="authmenu">
+	<div class = "authentication">
+          {% browserid_login text='Login' color='dark' %}
+	</div>
+        {% endif %}
+	<br>
+	<form action="{% url 'nsfLookup' abstractid="search" %}" method="post" enctype="multipart/form-data">
+	  {% csrf_token %}
+	  <p>Find NSF Abstract/Email: <input type="text" name="abstractVal">
+	  <input type="submit" value="Go" /></p>
+	</form> 
+  </div>
+    <div id="content">
+    {% if siteError %}
+    <p> <font color = "FF0000">Invalid Site!</font> </p>
+    <p> Something went wrong with the web address you provided. Check your url and try again. </p>
+    {% else %}
+      {% if links %}
+      <form action="{% url "processing" %}" method='post' enctype="multipart/form-data">
+	{% csrf_token %}
+      {{ form.as_p }}
+      <input type='submit' value='Submit Files'>
+      </form>
+      {% else %}
+      <p> <font color = "FF0000">No pdf files found!</font> </p>
+      <p> The website you provided had no valid pdfs within a 2-deep search. Perhaps try a different site?</p>
+      {% endif %}
+    {% endif %}
+  </div>
+  </div>
+  <div id="extra">
+     <p><a href="{% url 'home' %}"> Return to user homepage </a></p
+  </div>
+</div>
+ <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    {% browserid_js %}
+</body>
+</html> 

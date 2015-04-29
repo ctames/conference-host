@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% if paginate %}
+<div class="pagination">
+    <span class="step-links">
+        {% if pis.has_previous %}
+        [<a href="?page={{ pis.previous_page_number }}">Previous</a>] &nbsp;
+        {% endif %}
+
+        <span class="current">
+            Page {{ pis.number }} of {{ pis.paginator.num_pages }}
+        </span>
+
+        {% if pis.has_next %}
+        &nbsp; [<a href="?page={{ pis.next_page_number }}">Next</a>] 
+	&nbsp;&nbsp;&nbsp; [<a href="?page=all">Show All</a>]
+        {% endif %}
+    </span>
+</div>
+{% endif %}

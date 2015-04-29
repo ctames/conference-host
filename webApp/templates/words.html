@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+{{ description }} Words
+{% endblock %}
+{% block maintitle %}
+{{ description }} Words
+{% endblock %}
+{% block content %}
+
+{% for word, count in words %}
+<div class="hanging">
+  {{ word }}: {{ count }}
+</div>
+{% endfor %}
+{% endblock %}

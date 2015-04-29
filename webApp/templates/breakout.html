@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+Breakout {{ breakout.number }}: {{ breakout.title|truncatechars:56 }}
+{% endblock %}
+{% block maintitle %}
+{{ breakout.title|truncatechars:56 }}
+{% endblock %}
+
+{% block content %}
+<p>
+<b>Breakout {{ breakout.number }}</b>
+</p>
+<h3>{{ breakout.title }}</h3> 
+
+{{ breakout.location }}, {{ breakout.sessionTime }}
+<p>
+{{ breakout.description }}
+</p>
+
+<h3>Leader{{ leaders|pluralize }}</h3>
+
+{% for pi in leaders %}
+<div class="hanging">
+   {{ pi.fullDisplay|safe }}
+</div>
+{% endfor %}
+
+<h3>Participants</h3>
+
+{% for pi in pis %}
+<div class="hanging">
+   {{ pi.fullDisplay|safe }}
+</div>
+{% endfor %}
+</p>
+
+
+{% endblock %}

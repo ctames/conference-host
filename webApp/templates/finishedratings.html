@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+Rapid Meeting Reasons
+{% endblock %}
+{% block maintitle %}
+Rapid Meeting Reasons for {{ pi.displayName }}
+{% endblock %}
+
+{% block content %}
+
+{{ report|safe }}
+
+Thank you for submitting the meeting feedback.  As your token reward, here is <a href="http://www.nbc.com/saturday-night-live/video/more-cowbell-with-will-ferrell-on-snl--video--saturday-night-live--nbc/n41046"><b>more cowbell</b></a>!
+
+{% endblock %}

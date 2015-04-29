@@ -1,0 +1,8 @@
+{{ object.awardID }}
+{{ object.title }}
+{{ object.institution.displayName|safe }}
+{{ object.abstract }}
+
+{% for pi in object.getPIs %}
+{{ pi.investigator.fullDisplay|safe }}
+{% endfor %}

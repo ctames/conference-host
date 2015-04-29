@@ -1,0 +1,68 @@
+{% load browserid %} 
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% browserid_css %}
+	<title>{% block title %}Login{% endblock %}</title>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}" />
+
+{% block style %}
+{% endblock %}
+
+<body>
+{% browserid_info %}
+<div id="container">
+
+<div id="header"><h1>{% block maintitle %}Login{% endblock %}</h1></div>
+
+{% block menu %}
+<div id="menu">{{ menu|safe }} 
+
+</div>
+{% endblock %}
+
+
+<p> </p>
+
+<div id="content">
+{% block content %}
+{{ message|safe }}
+
+<center>
+{% csrf_token %}
+        {% if user.is_authenticated %}
+        <span class="user">{{ user.email }} | {% browserid_logout text='Logout' %}</span>
+        {% else %}
+	<div class = "authentication">
+          {% browserid_login text='Login' color='dark' %}
+	</div>
+	{% endif %}
+</center>
+
+{% endblock %}
+</div>
+
+<div class="gap"></div>
+
+{% block footer %}
+    
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    {% browserid_js %}
+
+<div id="footer">
+<a href="/">rematchr.org</a>
+</div>
+{% endblock %}
+
+</div> <!-- end container-->
+
+</body>
+</html> 
+
+

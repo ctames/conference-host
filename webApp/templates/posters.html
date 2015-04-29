@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block maintitle %}
+{{ title }}
+{% endblock %}
+{% block content %}
+
+<p>
+<em>{{ explanation }}</em> (<a href="/posterpresenters">View by Presenters</a>)
+</p>
+
+<p>
+{% for poster in posters %}
+<div class="ptitle">
+{{ poster.showTitle|safe }}
+</div>
+<div class="indented">
+{{ poster.showPresenters|safe }}
+</div>
+{% endfor %}
+</p>
+
+{% endblock %}

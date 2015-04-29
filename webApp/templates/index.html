@@ -1,0 +1,45 @@
+{% extends "graph.html" %}
+{% block title %}
+NSF SaTC PIs
+{% endblock %}  
+{% block maintitle %}
+NSF SaTC PIs Meeting 2015
+{% endblock %}
+
+{% block header %}
+
+<table>
+<tr>
+<td valign="top">
+<b>SaTC Community</b>
+<div class="indented"> <A href="/pis?page=all&scope=attending&">Investigators</a> &middot; <a href="/institutions/">Institutions</a>
+</div>
+</p>
+<p>
+<b>SaTC Projects</b> 
+<div class="indented">
+<a href="/projects">All</a> &middot; <a href="/projects?active=True">Currently Active</a> &middot; <a href="/projects?minamount=1000000">Large ($1M+)</a>
+</div>
+</p>
+</td>
+<td width="25%">&nbsp;</td>
+<td valign="top">
+<b>SaTC PIs Meeting</b>
+<p>
+<a href="/posters/">Posters</a><br>
+<A href="/breakouts/">Breakout Discussions</a><br>
+<a href="https://www.usenix.org/conference/satcpi15">Meeting Site</a><br>
+<a href="/about">About this Site</a>
+</p>
+</td>
+</tr>
+</table>
+
+<p>
+{% endblock %}
+
+{% block after %}
+<p>
+<center><b>Active SaTC Collaborations</b></center>
+</p>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}
+Rapid Meeting Feedback for {{ pi.displayName }}
+{% endblock %}
+{% block maintitle %}
+Rapid Meeting Feedback for {{ pi.displayName }}
+{% endblock %}
+
+{% block content %}
+
+<b>Round {{ round }}</b>
+
+<form method="post" action="/submitrating/{{ rfid }}/{{ pi.email }}">
+
+{% csrf_token %}
+<p>
+{{ form.participants.label }}</br>
+{{ form.participants }}
+</p>
+<p>
+{{ form.guessreason.label }}</br>
+{{ form.guessreason }}
+</p>
+
+<p>
+{{ form.matchquality.label }}</br>
+{{ form.matchquality }}
+</p>
+
+<p>
+{{ form.comments.label }}</br>
+{{ form.comments }}
+</p>
+
+<input type="submit" value="Submit">
+
+</form>
+
+<p>
+Once you submit feedback for all of your rapit meetings, you'll be able to see the actual reasons for the matches.
+</p>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "graph.html" %}
+{% block title %}
+Insititution: {{ institution.showName }}
+{% endblock %}
+{% block maintitle %}
+{{ institution.showName|truncatechars:50 }}
+{% endblock %}
+
+{% block header %}
+
+{{ institution.location }}<br>
+Total Awarded: ${{ totalawarded }}
+
+<h3>Project{{ projects|pluralize }}</h3>
+
+<div class="explanation">
+{{ explanation|safe }}
+</div>
+
+{% for project in projects %}
+<div class="hanging">
+  {{ project.displayLinkName|safe }}
+</div>
+{% endfor %}
+
+<h3>Investigator{{ pis|pluralize }}</h3>
+{% for pi in pis %}
+<div class="hanging">
+  {{ pi.fullDisplay|safe }}
+</div>
+{% endfor %}
+
+<h3>Intra-Institution Collaborations</h3>
+
+{% endblock %}

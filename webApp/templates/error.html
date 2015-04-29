@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block maintitle %}Error: {{ message|truncatechars:50 }}{% endblock %}
+
+{% block content %}
+
+<p>
+The server encountered an error with your request:
+<blockquote>
+<font color="red"><b>{{ message }}</b></font>
+</blockquote>
+</p>
+<p>
+If you continue to get this response, or you feel that you reached
+this page in error, please <a href="/about.html">contact the site administrators.</a>
+</p>
+
+{% endblock %}
+
+

@@ -1,0 +1,67 @@
+{% load browserid %}
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+	{% browserid_css %}
+        <title>NSF Abstract #{{abstractid}}</title>   
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}" />
+    </head>
+<body>
+{% browserid_info %}
+<div id="container">
+<div id="header"><h1>NSF Abstract #{{abstractid}}</h1></div>
+  <div id="wrapper">
+{% csrf_token %}
+        {% if user.is_authenticated %}
+	<div id="menu">
+      <ul>
+      <li><a href="{% url 'home' %}">Profile Home</a></li>
+      <li><a href="{% url 'manage' %}">Manage Documents</a></li>
+	<li><a href="{% url 'manage' %}">Profile Settings</a></li>
+    	<li><div class = "authentication">
+          {% browserid_logout text='Logout' %}
+	</div></li></ul>
+        {% else %}
+	<div id="authmenu">
+	<div class = "authentication">
+          {% browserid_login text='Login' color='dark' %}
+	</div>
+        {% endif %}
+	<br>
+	<form action="{% url 'nsfLookup' abstractid="search" %}" method="post" enctype="multipart/form-data">
+	  {% csrf_token %}
+	  <p>Find NSF Abstract/Email: <input type="text" name="abstractVal">
+	  <input type="submit" value="Go" /></p>
+	</form> 
+  	</div>
+    <div id="content">
+    {% if status %}
+    <p><font color = "FF0000">{{ status }}</font></p>
+    {% endif %}
+    
+    <p>
+    <h3>Abstract</h3>
+      {{ abstractText |safe }}
+    </p>
+    <h3>Investigators</h3>
+    <ul>
+      {% for user in users %}
+      <li><a href="{% url 'nsfUser' userid=user %}">{{ user }}</a></li>
+      {% endfor %}
+      </ul>
+
+    <br>
+	<img src="/pdfManage/files/wordclouds/{{abstractid}}.png">
+    </div>
+  </div>
+  <div id="extra">
+  </div>
+</div>
+ <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    {% browserid_js %}
+</body>
+</html> 

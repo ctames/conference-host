@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+Breakout Discussions
+{% endblock %}
+{% block maintitle %}
+Breakout Discussions
+{% endblock %}
+
+{% block content %}
+
+{% for breakout in breakouts %}
+<div class="hanging">
+  {{ breakout.number }}. <a href="/breakout/{{ breakout.number }}">{{ breakout.title }}</a> ({{ breakout.location }}, {{ breakout.sessionTime }})
+<div class="indented">
+{{ breakout.description }}
+</div>
+   
+</div>
+{% endfor %}
+
+{% endblock %}

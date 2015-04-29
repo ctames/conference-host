@@ -1,0 +1,43 @@
+
+
+    {% if documents %}
+        <ul>
+        {% for document in documents %}
+        <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a> 
+	  <form action="{% url 'delete' document.id %}" method="post">
+	    {% csrf_token %}
+	    <input type="submit" value="Delete" />
+	  </form>
+	</li>
+        {% endfor %}
+        </ul>
+	<br>
+	<img src="/pdfManage/files/{{ user.username }}/profilecloud.png">
+    {% else %}
+        <p>No documents.</p>
+    {% endif %}
+
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url "home" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ fileform.non_field_errors }}</p>
+            <p>{{ fileform.docfile.label_tag }} {{ fileform.docfile.help_text }}</p>
+            <p>
+                {{ fileform.docfile.errors }}
+                {{ fileform.docfile }}
+            </p>
+            <p><input type="submit" value="Upload" /></p>
+        </form>
+
+	<form action="{% url "pdfupload" %}" method="post" enctype="multipart/form-data">
+	  {% csrf_token %}
+	  <p>{{ urlform.non_field_errors }}</p>
+	  <p>{{ urlform.baseurl.label_tag }}</p>
+	  <p>
+	      {{ urlform.baseurl.errors }}
+	      {{ urlform.baseurl }}
+	  </p>
+	  <p><input type="submit" value="Upload" /></p>
+	  </form>
+   
+    </body>
